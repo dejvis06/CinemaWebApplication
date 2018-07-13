@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:body>
+
+	<ui:composition template="Layout.xhtml">
+		<ui:define name="content">
+
+			<div class="page-header">
+				<div class="page-title">
+					<h3>
+						In Display <small>Update Monitor</small>
+					</h3>
+				</div>
+			</div>
+			<!-- /page header -->
+			<!-- Breadcrumbs line -->
+			<div class="breadcrumb-line">
+				<ul class="breadcrumb">
+					<li><a href="HomePage.xhtml">Home</a></li>
+					<li class="active">In Display</li>
+				</ul>
+				<div class="visible-xs breadcrumb-toggle">
+					<a class="btn btn-link btn-lg btn-icon" data-toggle="collapse"
+						data-target=".breadcrumb-buttons"><i class="icon-menu2"></i></a>
+				</div>
+			</div>
+			<!-- /breadcrumbs line -->
+			<h:form class="form-horizontal">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h6 class="panel-title">
+							<i class="icon-paragraph-right2"></i> Update Monitor of Display
+						</h6>
+					</div>
+
+					<div class="panel-body">
+
+						Hall:
+						<h:selectOneMenu value="#{hallBean.hall}"
+							converter="hallConverter">
+							<f:selectItem itemLabel="Select Hall" />
+							<p:ajax listener="#{hallBean.valueChanged}" update="monitorMenu" />
+							<f:selectItems value="#{hallBean.hallManager.getHalls()}" />
+						</h:selectOneMenu>
+						<br /> <br />Monitor:
+						<h:selectOneMenu id="monitorMenu"
+							value="#{inDisplayBean.inDisplay.monitor}"
+							converter="monitorConverter">
+							<f:selectItem itemLabel="Select Monitor" />
+							<p:ajax listener="#{inDisplayBean.monitorUpdated}"
+								update="inDisplayTable" />
+							<f:selectItems value="#{hallBean.monitors}" />
+						</h:selectOneMenu>
+						<br /> <br /> Displays In Selected Monitor: <br /> <br />
+						<h:dataTable var="d" id="inDisplayTable"
+							value="#{inDisplayBean.indisplayListOfMonitor}">
+							<h:column>
+								<f:facet name="header">Movie Title:</f:facet>
+								<h:outputText value="#{d.movie}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Monitor Number:</f:facet>
+								<h:outputText value="#{d.monitor}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Start Time:</f:facet>
+								<h:outputText value="#{d.startTime}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">End Time:</f:facet>
+								<h:outputText value="#{d.endTime}" />
+							</h:column>
+						</h:dataTable>
+						<br /> <br />
+
+						<h:commandButton value="Update Monitor"
+							action="#{inDisplayBean.update()}" />
+					</div>
+				</div>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+
+</html>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:body>
+
+	<ui:composition template="Layout.xhtml">
+		<ui:define name="content">
+
+			<div class="page-header">
+				<div class="page-title">
+					<h3>
+						In Display <small>Update Start Time</small>
+					</h3>
+				</div>
+			</div>
+			<!-- /page header -->
+			<!-- Breadcrumbs line -->
+			<div class="breadcrumb-line">
+				<ul class="breadcrumb">
+					<li><a href="HomePage.xhtml">Home</a></li>
+					<li class="active">In Display</li>
+				</ul>
+				<div class="visible-xs breadcrumb-toggle">
+					<a class="btn btn-link btn-lg btn-icon" data-toggle="collapse"
+						data-target=".breadcrumb-buttons"><i class="icon-menu2"></i></a>
+				</div>
+			</div>
+			<!-- /breadcrumbs line -->
+			<h:form class="form-horizontal">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h6 class="panel-title">
+							<i class="icon-paragraph-right2"></i> Insert InDisplay
+						</h6>
+					</div>
+
+					<div class="panel-body">
+
+						Start Time:
+						<h:inputText value="#{inDisplayBean.inDisplay.startTime}"
+							id="startTimeTextField" required="true"
+							requiredMessage="Start Time is required."
+							label="Start Time Text Field" converter="timeConverter">
+							<p:ajax listener="#{inDisplayBean.startTimeUpdated}" />
+						</h:inputText>
+						<h:message for="startTimeTextField" />
+						End Time:
+						<h:outputText value="#{inDisplayBean.inDisplay.endTime}" />
+						<br /> <br />
+
+						<h:commandButton value="Update Start Time"
+							action="#{inDisplayBean.save()}" />
+					</div>
+				</div>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+
+</html>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
+    	
+    	<ui:composition template="Layout.xhtml">
+<ui:define name="content">
+            
+            			<!-- Page header -->
+			<div class="page-header">
+				<div class="page-title">
+					<h3>
+						Movies <small>Create Movies</small>
+					</h3>
+				</div>
+			</div>
+			<!-- /page header -->
+			<!-- Breadcrumbs line -->
+			<div class="breadcrumb-line">
+				<ul class="breadcrumb">
+					<li><a href="HomePage.xhtml">Home</a></li>
+					<li class="active">Movies</li>
+				</ul>
+				<div class="visible-xs breadcrumb-toggle">
+					<a class="btn btn-link btn-lg btn-icon" data-toggle="collapse"
+						data-target=".breadcrumb-buttons"><i class="icon-menu2"></i></a>
+				</div>
+			</div>
+			<!-- /breadcrumbs line -->
+			<h:form class="form-horizontal">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h6 class="panel-title">
+							<i class="icon-paragraph-right2"></i> Add new movie
+						</h6>
+					</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label class="col-sm-2 control-label text-right">Title:</label>
+							<div class="col-sm-10">
+								<h:inputText value="#{movieBean.movie.title}"
+									id="titleTextField" required="true"
+									requiredMessage="Title is required." label="Title Field"
+									validator="#{movieBean.checkTitle}" class="form-control">
+									<f:validateLength minimum="1" maximum="30" />
+								</h:inputText>
+								<h:message for="titleTextField" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label text-right">Categorie:</label>
+							<div class="col-sm-10">
+								<h:selectOneMenu
+									value="#{movieBean.movie.kategorie}" converter="categorieConverter">
+									<f:selectItems value="#{categorieBean.getCategories()}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label text-right">Duration
+								(hh:mm:ss):</label>
+							<div class="col-sm-10">
+								<h:inputText value="#{movieBean.movie.duration}"
+									id="durationTextField" required="true"
+									requiredMessage="Duration Error." label="Duration Field"
+									converterMessage="Wrong Input." class="form-control">
+									<f:converter converterId="timeConverter" />
+								</h:inputText>
+								<h:message for="durationTextField" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label text-right">Reviews:</label>
+							<div class="col-sm-10">
+								<h:inputText value="#{movieBean.movie.reviews}"
+									id="reviewsTextField" required="true"
+									requiredMessage="Reviews are required." label="Reviews Field"
+									validator="#{movieBean.checkReviews}" class="form-control">
+								</h:inputText>
+								<h:message for="reviewsTextField" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label text-right">Start
+								Date:</label>
+							<div class="col-sm-10">
+								<p:calendar pattern="yyyy/MM/dd" locale="pt" required="true"
+									requiredMessage="Start Date is required." id="startDate"
+									value="#{movieBean.movie.startDate}" />
+								<h:message for="startDate" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label text-right">End
+								Date:</label>
+							<div class="col-sm-10">
+								<p:calendar pattern="yyyy/MM/dd" locale="pt" required="true"
+									requiredMessage="End Date is required." id="endDate"
+									value="#{movieBean.movie.endDate}" />
+								<h:message for="endDate" />
+							</div>
+						</div>
+						<div class="form-actions text-right">
+							<h:commandButton value="Add Movie"
+								action="#{movieBean.saveMovie()}" class="btn btn-primary" />
+						</div>
+					</div>
+				</div>
+			</h:form>
+            
+</ui:define>
+    	</ui:composition>
+    	
+    </h:body>
+
+</html>

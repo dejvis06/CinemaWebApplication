@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
+    	
+    	<ui:composition template="Layout.xhtml">
+            <ui:define name="content">
+            
+			<div class="page-header">
+				<div class="page-title">
+					<h3>
+						Movies <small>Account</small>
+					</h3>
+				</div>
+			</div>
+			<!-- /page header -->
+			<!-- Breadcrumbs line -->
+			<div class="breadcrumb-line">
+				<ul class="breadcrumb">
+					<li><a href="HomePage.xhtml">Home</a></li>
+					<li class="active">Movies</li>
+				</ul>
+				<div class="visible-xs breadcrumb-toggle">
+					<a class="btn btn-link btn-lg btn-icon" data-toggle="collapse"
+						data-target=".breadcrumb-buttons"><i class="icon-menu2"></i></a>
+				</div>
+			</div>
+			<!-- /breadcrumbs line -->
+			<h:form class="form-horizontal">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h6 class="panel-title">
+							<i class="icon-paragraph-right2"></i> Modify Account
+						</h6>
+					</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label class="col-sm-2 control-label text-right">Name:</label>
+							<div class="col-sm-10">
+								<h:inputText value="#{accountBean.user.name}" id="nameTextField"
+									required="true" requiredMessage="Your name is required."
+									label="Name Field" class="form-control">
+									<f:validateLength minimum="1" maximum="30" />
+								</h:inputText>
+								<h:message for="nameTextField" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label text-right">Surname:</label>
+							<div class="col-sm-10">
+								<h:inputText id="surnameTextField"
+									value="#{accountBean.user.surname}" required="true"
+									requiredMessage="Your surname is required."
+									label="Surname Field" class="form-control">
+									<f:validateLength minimum="1" maximum="30" />
+								</h:inputText>
+								<h:message for="surnameTextField" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label text-right">Username:</label>
+							<div class="col-sm-10">
+								<h:inputText value="#{accountBean.user.username}"
+									required="true" requiredMessage="Your username is required."
+									validator="#{accountBean.checkUsername}" id="usernameTextField"
+									label="Username Field" class="form-control">
+									<f:validateLength minimum="1" maximum="30" />
+								</h:inputText>
+								<h:message for="usernameTextField" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label text-right">Password:</label>
+							<div class="col-sm-10">
+								<h:inputSecret value="#{accountBean.user.password}"
+									required="true" id="passwordTextField"
+									requiredMessage="Your password is required."
+									label="Password Field" class="form-control">
+									<f:validateLength minimum="8" maximum="30" />
+								</h:inputSecret>
+								<h:message for="passwordTextField" />
+							</div>
+						</div>
+
+						<div class="form-actions text-right">
+							<h:commandButton value="Save Changes"
+								action="#{accountBean.modifyAccount()}" required="true"
+								class="btn btn-primary" />
+						</div>
+					</div>
+				</div>
+			</h:form>
+            
+            </ui:define>
+    	</ui:composition>
+    	
+    </h:body>
+
+</html>
